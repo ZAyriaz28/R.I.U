@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meditación contra la Ansiedad - Frecuencias Sanadoras</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-bg-light: #f0fbff;
+      --color-gradient-from: #caf0f8;
+      --color-gradient-via: #90e0ef;
+      --color-gradient-to: #00b4d8;
+
+      --color-accent: #0077b6;
+      --color-accent-hover: #0096c7;
+
+      --color-text-primary: #023e8a;
+      --color-text-secondary: #0077b6;
+      --color-text-muted: #4a6572;
+
+      --color-white: #ffffff;
+
+      --radius: 0.75rem;
+
+      --shadow-card: rgba(0, 75, 123, 0.15);
+      --shadow-header: rgba(0, 123, 255, 0.15);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--color-gradient-from), var(--color-gradient-via), var(--color-gradient-to));
+      color: var(--color-text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2rem 1rem 4rem;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: var(--color-white);
+      box-shadow: 0 2px 12px var(--shadow-header);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header .logo {
+      font-weight: 700;
+      font-size: 1.75rem;
+      color: var(--color-accent);
+      letter-spacing: 0.12em;
+      user-select: none;
+    }
+
+    nav a {
+      color: var(--color-text-secondary);
+      font-weight: 600;
+      margin-left: 2rem;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.25s ease;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      color: var(--color-accent-hover);
+    }
+
+    main {
+      max-width: 900px;
+      width: 100%;
+      padding: 4rem 1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 3.5rem;
+    }
+
+    .hero {
+      max-width: 720px;
+      background: var(--color-white);
+      padding: 3rem 2rem;
+      border-radius: var(--radius);
+      box-shadow: 0 10px 30px var(--shadow-card);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      font-weight: 700;
+      margin: 0;
+      color: var(--color-text-primary);
+    }
+
+    .hero p {
+      margin-top: 1rem;
+      font-size: 1.25rem;
+      color: var(--color-text-muted);
+    }
+
+    .frequencies {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.5rem;
+      width: 100%;
+    }
+
+    .card {
+      background: var(--color-white);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 25px var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1.5rem;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover, .card:focus-within {
+      box-shadow: 0 15px 40px rgba(0, 123, 255, 0.3);
+      transform: scale(1.05);
+      border-color: var(--color-accent-hover);
+    }
+
+    .card h2 {
+      font-size: 2rem;
+      margin: 0 0 0.5rem;
+      color: var(--color-accent);
+    }
+
+    .card p {
+      font-size: 1rem;
+      color: var(--color-text-secondary);
+      font-weight: 600;
+    }
+
+    button.play-button {
+      margin-top: 1.2rem;
+      background: var(--color-accent);
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 8px 22px rgba(0, 119, 184, 0.6);
+      cursor: pointer;
+      color: var(--color-white);
+    }
+
+    button.play-button:hover {
+      background: var(--color-accent-hover);
+      transform: scale(1.12);
+    }
+
+    button.play-button svg {
+      fill: var(--color-white);
+      width: 28px;
+      height: 28px;
+    }
+
+    footer {
+      margin-top: 5rem;
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 1.5rem 1rem 3rem;
+      }
+      main {
+        padding: 3rem 1rem 1rem;
+      }
+      .card {
+        padding: 1.5rem 1rem;
+      }
+      .hero {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">RIU</div>
+    <nav>
+      <a href="#frequencies">Frecuencias</a>
+      <a href="#about">Sobre</a>
+      <a href="#footer">Contacto</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <h1 id="hero-title">Meditación para Calmar la Ansiedad</h1>
+      <p>Experimenta armonía interior con frecuencias curativas 852Hz, 432Hz, 417Hz y 528Hz.</p>
+    </section>
+
+    <section id="frequencies" class="frequencies" aria-label="Frecuencias sanadoras">
+      <article class="card">
+        <h2>852 Hz</h2>
+        <p>Conecta con tu intuición y despierta tu conciencia.</p>
+        <button class="play-button" onclick="playAudio('audio-852')" aria-label="Reproducir frecuencia 852 Hz">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <audio id="audio-852" src="852hz.mp3"></audio>
+      </article>
+
+      <article class="card">
+        <h2>432 Hz</h2>
+        <p>Relaja tu mente y equilibra tu cuerpo.</p>
+        <button class="play-button" onclick="playAudio('audio-432')" aria-label="Reproducir frecuencia 432 Hz">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <audio id="audio-432" src="432hz.mp3"></audio>
+      </article>
+
+      <article class="card">
+        <h2>417 Hz</h2>
+        <p>Transforma energías negativas y fomenta el cambio.</p>
+        <button class="play-button" onclick="playAudio('audio-417')" aria-label="Reproducir frecuencia 417 Hz">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <audio id="audio-417" src="417hz.mp3"></audio>
+      </article>
+
+      <article class="card">
+        <h2>528 Hz</h2>
+        <p>Repara el ADN y promueve la sanación emocional.</p>
+        <button class="play-button" onclick="playAudio('audio-528')" aria-label="Reproducir frecuencia 528 Hz">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <audio id="audio-528" src="528hz.mp3"></audio>
+      </article>
+    </section>
+
+    <section id="about" class="hero" aria-labelledby="about-title">
+      <h1 id="about-title">¿Por qué escuchar estas frecuencias?</h1>
+      <p>
+        Estas frecuencias se han utilizado durante siglos en prácticas de meditación para ayudar a
+        sanar la mente y el cuerpo. Cada una vibra en armonía con distintas emociones, órganos y niveles de conciencia.
+      </p>
+    </section>
+  </main>
+
+  <footer id="footer">
+    <p>© 2025 RIU Meditación. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    function playAudio(id) {
+      const audios = document.querySelectorAll('audio');
+      audios.forEach(audio => {
+        if (audio.id !== id) audio.pause();
+      });
+
+      const audio = document.getElementById(id);
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+  </script>
+</body>
+</html>

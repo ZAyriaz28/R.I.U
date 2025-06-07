@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Test de Ansiedad - RIU</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #d0f0e0, #a0d9c7);
+      color: #2c3e50;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      color: #2c7a7b;
+    }
+
+    header p {
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+
+    nav {
+      background-color: #ffffffcc;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 10px 20px;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex-wrap: wrap;
+    }
+
+    .menu li {
+      margin: 0 10px;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #2c7a7b;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .menu a:hover {
+      color: #38b2ac;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      background: #2c7a7b;
+      margin: 4px 0;
+      width: 25px;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    .container h1 {
+      text-align: center;
+      color: #2c7a7b;
+    }
+
+    .question {
+      margin: 20px 0;
+    }
+
+    .question p {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    label:hover {
+      transform: scale(1.02);
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    button {
+      display: block;
+      margin: 30px auto 10px;
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #38b2ac;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #2c7a7b;
+    }
+
+    #resultado {
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-top: 25px;
+      color: #2c3e50;
+      padding: 15px;
+    }
+
+    #grafico-container {
+      max-width: 500px;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Evaluación Psicométrica Inicial</h1>
+    <p>Este test no reemplaza un diagnóstico clínico. Su propósito es orientativo.</p>
+  </header>
+
+  <nav>
+    <div class="menu-toggle" onclick="document.querySelector('.menu').classList.toggle('active')">
+      <span></span><span></span><span></span>
+    </div>
+    <ul class="menu">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="test.html">Test</a></li>
+      <li><a href="prueba.html">Juegos</a></li>
+      <li><a href="#musica">Música</a></li>
+      <li><a href="meditacionvideos.html">Meditación</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>Test de Ansiedad</h1>
+    <form id="testForm"></form>
+    <button type="button" onclick="calcularResultado()">Ver Resultado</button>
+    <div id="resultado"></div>
+    <div id="grafico-container">
+      <canvas id="grafico"></canvas>
+    </div>
+
+    <div class="container" style="max-width: 600px; margin: 20px auto; font-family: Arial, sans-serif;">
+  <div id="resultadoBarra" style="display: flex; align-items: center; gap: 20px;">
+    <div id="resultado" style="flex: 1; font-weight: bold; font-size: 1.1em; color: #2c3e50;">
+      Resultado aparecerá aquí
+    </div>
+    <div id="barraCarga" style="position: relative; height: 30px; width: 250px; background: #a7a7aa; border-radius: 15px; overflow: hidden; flex-shrink: 0;">
+      <div id="barraProgreso" style="height: 100%; width: 0%; background: rgb(52, 48, 75); border-radius: 15px 0 0 15px; transition: width 0.5s, background-color 0.5s;"></div>
+      <!-- Marcadores de rango -->
+      <div style="position: absolute; top: 0; bottom: 0; left: calc(17 / 48 * 100%); width: 4px; background: green;"></div>
+      <div style="position: absolute; top: 0; bottom: 0; left: calc(24 / 48 * 100%); width: 4px; background: orange;"></div>
+      <div style="position: absolute; top: 0; bottom: 0; left: calc(30 / 48 * 100%); width: 4px; background: red;"></div>
+    </div>
+  </div>
+  <div style="display: flex; justify-content: space-between; font-size: 0.75em; margin-top: 5px; color: #2c3e50; max-width: 250px; margin-left: auto;">
+    <span>0</span>
+    <span>17</span>
+    <span>24</span>
+    <span>30</span>
+    <span>48</span>
+  </div>
+</div>
+  </div>
+
+  
+
+
+  <!-- Chart.js desde CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    const preguntas = [
+      "¿Con qué frecuencia te sientes nervioso?",
+      "¿Con qué frecuencia te sientes irritable?",
+      "¿Con qué frecuencia sientes miedo sin motivo claro (a enfermar, perder el control, etc.)?",
+      "¿Has tenido problemas para dormir o descansar bien?",
+      "¿Te cuesta mantener la atención o concentrarte en tus actividades?",
+      "¿Tienes tensión muscular, dolores o rigidez sin causa física?",
+      "¿Sientes hormigueos o sensibilidad aumentada?",
+      "¿Tu corazón se acelera, sientes palpitaciones o presión en el pecho?",
+      "¿Sientes dificultad para respirar o sensación de ahogo?",
+      "¿Sientes molestias estomacales o náuseas ante una situacion de estres?",
+      "¿Has notado cambios en el deseo sexual?",
+      "¿Sientes inquietud corporal o haces movimientos constantes (manos, pies, etc.)?"
+    ];
+
+    const opciones = ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"];
+    const form = document.getElementById("testForm");
+
+    preguntas.forEach((texto, i) => {
+      const div = document.createElement("div");
+      div.className = "question";
+      const p = document.createElement("p");
+      p.textContent = `${i + 1}. ${texto}`;
+      div.appendChild(p);
+
+      opciones.forEach((op, j) => {
+        const label = document.createElement("label");
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = `q${i}`;
+        input.value = j;
+        input.required = true;
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(` ${j} - ${op}`));
+        div.appendChild(label);
+      });
+
+      form.appendChild(div);
+    });
+
+    let chart = null;
+
+    function calcularResultado() {
+  const respuestas = document.querySelectorAll("form input[type=radio]:checked");
+  if (respuestas.length < preguntas.length) {
+    alert("Por favor, responde todas las preguntas.");
+    return;
+  }
+
+  let total = 0;
+  respuestas.forEach(r => total += parseInt(r.value));
+
+  let interpretacion = "";
+  if (total <=17) interpretacion = "Ansiedad leve o dentro de lo normal.";
+  else if (total <= 24) interpretacion = "Ansiedad leve a moderada.";
+  else if (total <= 30) interpretacion = "Ansiedad moderada a severa.";
+  else interpretacion = "Ansiedad severa. Considera hablar con un profesional.";
+
+  document.getElementById("resultado").textContent = `Resultado: ${total} puntos. ${interpretacion}`;
+
+  // Actualizar barra de carga
+  const porcentaje = (total / 48) * 100;
+  const barra = document.getElementById("barraProgreso");
+  barra.style.width = porcentaje + "%";
+
+  mostrarGrafico(total);
+}
+
+
+    
+  </script>
+</body>
+</html>
